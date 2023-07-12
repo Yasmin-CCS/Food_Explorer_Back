@@ -1,28 +1,35 @@
 const knex = require("../database/knex");
+const DiskStorage = require("../providers/DiskStorage");
 
 
 class PratosController {
   async create(request, response) {
-    const { nome, description, categorias, ingredientes, preco, foto } = request.body;
+    const { nome, description, categorias, ingredientes, preco } = request.body;
     const user_id = request.user.id;
 
+    const fotoFileName = request.file.filename
+
+    const diskStorage = new DiskStorage()
+
+    const fotoFile = await diskStorage.saveFile(fotoFileName)
+    
     const [pratos_id] = await knex("pratos").insert({
       nome,
       description,
-      foto,
       preco,
+      foto: fotoFile,
       user_id
     });
-
+    
     const categoriasInsert = categorias.map(categoria => {
       return {
         pratos_id,
         url: categoria,
       }
     });
-
+  
     await knex("categorias").insert(categoriasInsert);
-
+  
     const ingredientesInsert = ingredientes.map(nome => {
       return {
         pratos_id,
@@ -30,12 +37,12 @@ class PratosController {
         user_id
       }
     });
-
+  
     await knex("ingredientes").insert(ingredientesInsert);
-
+    
     return response.json();
   }
-
+  
   async show(request, response) {
     const { id } = request.params;
 
