@@ -15,11 +15,8 @@ const pratosFotosController = new PratosFotosController();
 
 pratosRoutes.use(ensureAuthenticated);
 
-// pratosRoutes.patch("/:id/foto", upload.single("foto"), pratosFotosController.update);
-pratosRoutes.put("/:id", upload.single("foto"), pratosController.update);
-pratosRoutes.post("/", upload.single("foto"), pratosController.create);
+
 pratosRoutes.get("/:id", pratosController.show);
 pratosRoutes.get("/", pratosController.index);
-pratosRoutes.delete("/:id", pratosController.delete);
 
 module.exports = pratosRoutes;

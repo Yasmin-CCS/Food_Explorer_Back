@@ -4,8 +4,9 @@ exports.up = knex => knex.schema.createTable("pratos", table => {
   table.text("nome");
   table.text("description");
   table.decimal("preco");
-  table.text("foto");
-  table.integer("user_id").references("id").inTable("users");
+  table.binary("foto");
+
+  table.integer("categorias_id").references("id").inTable("categorias");
 
   table.timestamp("created_at").default(knex.fn.now());
   table.timestamp("updated_at").default(knex.fn.now());
