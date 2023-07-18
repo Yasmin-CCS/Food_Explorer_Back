@@ -48,6 +48,4 @@ O Food Explorer é uma aplicação que permite ao administrador criar, gerenciar
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir uma pull request com melhorias, correções de bugs ou novas funcionalidades.
 
-## Licença
 
-Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
